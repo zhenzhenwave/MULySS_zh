@@ -1,3 +1,4 @@
 Hello, world!
 first git file!
 add a new new line
+how does git works ?
