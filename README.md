@@ -4,7 +4,7 @@
 - [ ] 针对M矮星，选择数据库，改进拟合参数
 
 # ULySS
-+ ULySS是法国的里昂大学基于IDL\[GDL](https://github.com/gnudatalanguage/gdl)开发的光谱分析软件。其线性组合了一些非线性函数与视向速度成分的卷积（并乘以多项式）来拟合光谱。能用于恒星大气参数和星族形成历史的研究。
++ ULySS是法国的里昂大学基于IDL\\[GDL](https://github.com/gnudatalanguage/gdl)开发的光谱分析软件。其线性组合了一些非线性函数与视向速度成分的卷积（并乘以多项式）来拟合光谱。能用于恒星大气参数和星族形成历史的研究。
 + 使用手册：[官网](http://ulyss.univ-lyon1.fr/)、[我的笔记](https://github.com/zhenzhenwave/ULySS_M/blob/master/ULySS_note.md)
 
 # ULySS_M
