@@ -4,3 +4,4 @@ add a new new line
 how does git works ?
 
 I'm using a new git branch
+AMD yes!
