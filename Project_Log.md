@@ -45,7 +45,7 @@ IDL> fit_b16_1
 
 ### Fit完成，无图像输出
 + 注释了所有plot后的stop
-<img src="C:\Users\dmy\AppData\Roaming\Typora\typora-user-images\image-20200921164057148.png" alt="Teff v.s. log g" style="zoom:50%;" />
+<img src="./Test/Teff-logg-error.png" alt="Teff v.s. log g" style="zoom:50%;" />
 
 + 存在11条光谱是invalid，其余fit完成。
 ```idl
