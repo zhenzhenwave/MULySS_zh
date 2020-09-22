@@ -35,8 +35,8 @@ IDL> fit_b16_1
 %                      $MAIN$   
 ```
 1. 文本处理：从星表table_b16中读取DESIG，存放于/Data_Download/table_b16/Desig_names.txt
-2. DESIG是天体的时角Hourangle，使用/Pre-processing/HourAngle2Angle.ipynb将时角转换成角度，存放于/Data_Download/table_b16/coords_Angle.txt
-3. 数据下载：在LAMOST DR3中，使用coords_Angle.txt角度检索，下载2"内匹配的光谱fits文件，存放于/Data_Download/table_b16。下载星表数据/Data_Download/table_b16/496340.csv
+2. DESIG是天体的时角Hourangle，使用/Pre-processing/HourAngle2Angle.ipynb将时角转换成角度，存放于/Data_Download/DR3_table_b16/coords_Angle.txt
+3. 数据下载：在LAMOST DR3中，使用coords_Angle.txt角度检索，下载2"内匹配的光谱fits文件，存放于/Data_Download/table_b16。下载星表数据/Data_Download/DR3_table_b16/496340.csv
 4. 496340.csv的分隔符是'|'，需要改成',' 。以便TopCat识别
 5. 筛选星表：使用TopCat读取table_b16_2.csv，筛选R、i波段信噪比snrr、snri>10的文件保留，提高可靠性。
 6. 删除掉检索编号相同的文件，保留信噪比高的。保存为/Pre-processing/table_b16_2.csv
