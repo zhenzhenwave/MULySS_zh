@@ -243,6 +243,36 @@ Logg           :       4.7252245 +/- 0.039178593 cm/s2
 Fe/H           :     -0.65920263 +/- 0.046833622 dex
 -----------------------------------------------
 ```
+### question
+1. 星表中的物理量是什么(单位？)
+```idl
+readcol, infile, designation, spt, teffin, zeta, fehin, veloin,format='A,F,F,F,F,F'
+```
++ spt :
++ zeta : 
++ veloin : 
+
+2. 拟合失败的原因？（list 5 为例）
+```idl
+-> No valid input fits file.
+   4.1007996e-05
+parameter: J012100.34-012517.0   2.  3500  0.655 -0.5 262
+path: J012100.34-012517.0 11.7 spec-56600-EG012606S021203F02_sp14-081.fits
+```
+
+3. 拟合之后，画图失败？
++ stop :
++ plot参数设置 : 
+```idl
+plot,alog10(outout(0,tmp)),outout(1,tmp), xtitle='log(Teff)', $
+	xr=xr1,xstyle=xstyle, xthick=xthick, ytickin=1, xtickin=0.1, $
+      xmargin=[12,2], yr=yr1, ythick=ythick, ystyle=ystyle, ymargin=[3.5,1], $
+      xticklen=0.025, yticklen=0.015, charsize=charsize, ytitle='log g', $
+      charthick=charthick, /nodata, thick=thick, xminor=2, yminor=2, BACKGROUND = grey
+oplot, alog10(outout(0,tmp)),outout(1,tmp), psym=psym, symsize=symsize, color= black
+;oplot, (alog10(para(3,*)))(tm3), (para(5,*))(tm3), psym=psym, symsize=symsize, color= blue
+stop
+```
 
 # Stage2:制作星表，交叉验证
 - [ ] 下载数据：从lamost下载数据，按照正式名称筛选，下载fits，保存成csv--> 得到星表：（包含名称、属性数据，可以筛选信息）
