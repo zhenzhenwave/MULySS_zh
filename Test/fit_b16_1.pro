@@ -233,8 +233,8 @@ xr1=[max(outout(0,tmp))+0.5,min(outout(0,tmp))-0.5]
 yr1=[min(outout(1,tmp))-0.5,max(outout(1,tmp))+0.5]
 
 ; < ==== 添加了断点，直接画图
-stop
 plot, outout(0,*), outout(1,*),psym = 1
+stop
 
 ;== plot teff vs logg ==
 plot,alog10(outout(0,tmp)),outout(1,tmp), xtitle='log(Teff)', $

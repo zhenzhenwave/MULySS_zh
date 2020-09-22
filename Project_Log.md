@@ -44,8 +44,8 @@ IDL> fit_b16_1
 8. 更新星表：csv2text.ipynb将table_b16与筛选后的DataBase_b16.txt对比，保留72个相同DESIG的目标，存放于/Test/Pre-processing/table_b16_modified
 
 ### Fit完成，无图像输出
-+ 注释了所有plot后的stop
-<img src="./Test/Teff-logg-error.png" alt="Teff v.s. log g" style="zoom:50%;" />
+
+<img src="./Test/Teff-logg-no-para.png" alt="Teff v.s. log g no para" style="zoom:50%;" />
 
 + 存在11条光谱是invalid，其余fit完成。
 ```idl
@@ -263,6 +263,7 @@ path: J012100.34-012517.0 11.7 spec-56600-EG012606S021203F02_sp14-081.fits
 ```
 
 3. 拟合之后，画图失败
+<img src="./Test/Teff-logg-error.png" alt="Teff v.s. log g" style="zoom:50%;" />
 + stop : 在该位置断点。在交互界面输入 .c 即可继续运行 （方便查看变量）
 + plot参数设置 : 
 ```idl
