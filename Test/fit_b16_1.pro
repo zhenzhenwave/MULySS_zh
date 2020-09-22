@@ -61,9 +61,11 @@ for i = 0,nl-1 do begin
    ;mysqlquery, lun, cmd, specpath, snrr, format='a,f'
    str_tmp = ''
    readf, lun, str_tmp
-   DESIG_name = strmid(str_tmp,0,19)
-   snrr = strmid(str_tmp,20,5)
-   specpath = strmid(str_tmp,26)
+   ; <=== 使用更鲁棒的字符串分割方法
+   str_list = strsplit(str_tmp,' ',/EXTRACT)
+   DESIG_name = str_list[0]
+   snrr = str_list[1]
+   specpath = str_list[2]
 
    ; < ===  specpath 是文件绝对地址
    ; spec_path(i)= '/home/wuyue/data7/'+strmid(specpath,7,len-7)
