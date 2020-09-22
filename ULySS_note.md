@@ -6,7 +6,7 @@
 - [ ] 按照例子的做法，尝试筛选数据
 - [ ] 把筛选数据预处理，主程序
 
-# Stage1
+# Overview
 ## ULySS文件结构
 1. ulyss.pro ：主程序  、光谱分析
 2. uly_fit.pro ：用非线性模型 fit 光谱
@@ -40,7 +40,7 @@
 ## 验证
 用有已知参数的高分辨光谱做验证
 
-# Stage2
+# Usage in detail
 ## 恒星大气参数
 1. 读入CFLIB的一个星
 ```idl
