@@ -4,7 +4,7 @@
 - [x] 筛选：选择信噪比snri、snrr 高的数据（排除坏点）
 - [x] 保存文件：包含文件路径和snrr，以便table_b16_1.pro可以检索到 
 
-## 编译运行fit_b16_1.pro
+## 编译运行/Test/fit_b16_1.pro
 ```idl
 IDL> cd, $indep
 IDL> .compile fit_b16_1-c.pro
@@ -34,14 +34,14 @@ IDL> fit_b16_1
 % Execution halted at: FIT_B16_1          53 /usr/local/ulyss/pgm/indep/fit_b16_1-c.pro
 %                      $MAIN$   
 ```
-1. 文本处理：从星表table_b16中读取DESIG，存放于/Data_Download/table_b16/Desig_names.txt
-2. DESIG是天体的时角Hourangle，使用/Pre-processing/HourAngle2Angle.ipynb将时角转换成角度，存放于/Data_Download/DR3_table_b16/coords_Angle.txt
-3. 数据下载：在LAMOST DR3中，使用coords_Angle.txt角度检索，下载2"内匹配的光谱fits文件，存放于/Data_Download/table_b16。下载星表数据/Data_Download/DR3_table_b16/496340.csv
+1. 文本处理：从星表table_b16中读取DESIG，存放于/Test/Data_Download/table_b16/Desig_names.txt
+2. DESIG是天体的时角Hourangle，使用/Test/Pre-processing/HourAngle2Angle.ipynb将时角转换成角度，存放于/Test/Data_Download/DR3_table_b16/coords_Angle.txt
+3. 数据下载：在LAMOST DR3中，使用coords_Angle.txt角度检索，下载2"内匹配的光谱fits文件，存放于/Test/Data_Download/table_b16。下载星表数据/Test/Data_Download/DR3_table_b16/496340.csv
 4. 496340.csv的分隔符是'|'，需要改成',' 。以便TopCat识别
 5. 筛选星表：使用TopCat读取table_b16_2.csv，筛选R、i波段信噪比snrr、snri>10的文件保留，提高可靠性。
-6. 删除掉检索编号相同的文件，保留信噪比高的。保存为/Pre-processing/table_b16_2.csv
-7. 文本处理：使用/Pre-processing/csv2text.ipynb将table_b16_2.csv中的DESIG、SNRR、Spec_path保存在/Pre-processing/DataBase_b16.txt中
-8. 更新星表：csv2text.ipynb将table_b16与筛选后的DataBase_b16.txt对比，保留72个相同DESIG的目标，存放于/Pre-processing/table_b16_modified
+6. 删除掉检索编号相同的文件，保留信噪比高的。保存为/Test/Pre-processing/table_b16_2.csv
+7. 文本处理：使用/Test/Pre-processing/csv2text.ipynb将table_b16_2.csv中的DESIG、SNRR、Spec_path保存在/Test/Pre-processing/DataBase_b16.txt中
+8. 更新星表：csv2text.ipynb将table_b16与筛选后的DataBase_b16.txt对比，保留72个相同DESIG的目标，存放于/Test/Pre-processing/table_b16_modified
 
 ### Fit完成，无图像输出
 + 注释了所有plot后的stop
