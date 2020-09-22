@@ -5,3 +5,5 @@ how does git works ?
 
 I'm using a new git branch
 NVida no! AMD yes!
+
+a new dev without ff
