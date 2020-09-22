@@ -244,15 +244,17 @@ Fe/H           :     -0.65920263 +/- 0.046833622 dex
 -----------------------------------------------
 ```
 ### question
-1. 星表中的物理量是什么(单位？)
+1. 物理量是什么(单位？)
 ```idl
 readcol, infile, designation, spt, teffin, zeta, fehin, veloin,format='A,F,F,F,F,F'
 ```
 + spt :
-+ zeta : 
-+ veloin : 
++ zeta : Fe/H (dex)
++ veloin : 视向速度RV
 
-2. 拟合失败的原因？（list 5 为例）
+2. 拟合失败（list 5 为例）
+
+   输入的地址没有检索到
 ```idl
 -> No valid input fits file.
    4.1007996e-05
@@ -260,8 +262,8 @@ parameter: J012100.34-012517.0   2.  3500  0.655 -0.5 262
 path: J012100.34-012517.0 11.7 spec-56600-EG012606S021203F02_sp14-081.fits
 ```
 
-3. 拟合之后，画图失败？
-+ stop :
+3. 拟合之后，画图失败
++ stop : 在该位置断点。在交互界面输入 .c 即可继续运行 （方便查看变量）
 + plot参数设置 : 
 ```idl
 plot,alog10(outout(0,tmp)),outout(1,tmp), xtitle='log(Teff)', $
@@ -273,6 +275,19 @@ oplot, alog10(outout(0,tmp)),outout(1,tmp), psym=psym, symsize=symsize, color= b
 ;oplot, (alog10(para(3,*)))(tm3), (para(5,*))(tm3), psym=psym, symsize=symsize, color= blue
 stop
 ```
+4. table_b16_1_out文件的含义（以J003010.59+400741.0  spec-56266-M31007N41B1_sp05-090为例）
+
+| snrr  | snr   | T      | T_err | G    | G_err | M     | M_err | RV   | RV_err | sigma | sig_err |
+| ----- | ----- | ------ | ----- | ---- | ----- | ----- | ----- | ---- | ------ | ----- | ------- |
+| 35.05 | 22.24 | 3653.0 | 34.3  | 4.87 | 0.07  | -0.95 | 0.15  | 17.5 | 10.2   | 51.5  | 14.1    |
+
+5. outout 变量的含义 ( $9\times$ num_stars 二维数组)
+
+| 0    | 1    | 2    | 3    | 4       | 5       | 6       | 7        | 8    |
+| ---- | ---- | ---- | ---- | ------- | ------- | ------- | -------- | ---- |
+| T    | G    | M    | RV   | T_err_c | G_err_c | M_err_c | RV_err_c | snr  |
+
+   
 
 # Stage2:制作星表，交叉验证
 - [ ] 下载数据：从lamost下载数据，按照正式名称筛选，下载fits，保存成csv--> 得到星表：（包含名称、属性数据，可以筛选信息）

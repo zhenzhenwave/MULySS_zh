@@ -232,6 +232,10 @@ linestyle = 0 ;line style for gaussian
 xr1=[max(outout(0,tmp))+0.5,min(outout(0,tmp))-0.5]
 yr1=[min(outout(1,tmp))-0.5,max(outout(1,tmp))+0.5]
 
+; < ==== 添加了断点，直接画图
+stop
+plot, outout(0,*), outout(1,*),psym = 1
+
 ;== plot teff vs logg ==
 plot,alog10(outout(0,tmp)),outout(1,tmp), xtitle='log(Teff)', $
 	xr=xr1,xstyle=xstyle, xthick=xthick, ytickin=1, xtickin=0.1, $
@@ -241,7 +245,7 @@ plot,alog10(outout(0,tmp)),outout(1,tmp), xtitle='log(Teff)', $
 oplot, alog10(outout(0,tmp)),outout(1,tmp), psym=psym, symsize=symsize, color= black
 ;oplot, (alog10(para(3,*)))(tm3), (para(5,*))(tm3), psym=psym, symsize=symsize, color= blue
 ;< === 注释了stop
-;stop
+stop
 
 ;== plot teff vs feh ==
 xr1=[max(outout(0,tmp))+0.5,min(outout(0,tmp))-0.5]
@@ -252,23 +256,23 @@ plot,alog10(outout(0,tmp)),outout(2,tmp), xtitle='log(Teff)', $
       xticklen=0.025, yticklen=0.015, charsize=charsize, ytitle='feh', $
       charthick=charthick, /nodata, thick=thick, xminor=2, yminor=2, BACKGROUND = grey
 oplot, alog10(outout(0,tmp)),outout(2,tmp), psym=psym, symsize=symsize, color= black
-;stop
+stop
 
 
 ;== plot check teff ==
 plot, teffin(tmp), outout(0,tmp),psym=psym, symsize=symsize, color= black
-;stop
+stop
 
 
 ;== plot check feh ==
 plot,fehin(tmp), outout(2,tmp),psym=psym, symsize=symsize, color= black
-;stop
+stop
 ;ok
 
 ;'== plot check rv ==
 tmp1 = where(index2 eq 1 and veloin ne -9999, cnt1)
 plot, veloin(tmp1), outout(3,tmp1),psym=psym, symsize=symsize, color= black
-;stop
+stop
 
 
 print, '-> Finish fit_b16_1'
