@@ -133,6 +133,7 @@ Fe/H           :      -1.4611790 +/- 0.045085786 dex
 <img src="./Test/Teff-logg-error.png" alt="Teff v.s. log g" style="zoom:50%;" />
 + stop : 在该位置断点。在交互界面输入 .c 即可继续运行 （方便查看变量）
 + plot参数设置 : 
+
 ```idl
 plot,alog10(outout(0,tmp)),outout(1,tmp), xtitle='log(Teff)', $
 	xr=xr1,xstyle=xstyle, xthick=xthick, ytickin=1, xtickin=0.1, $
@@ -143,6 +144,7 @@ oplot, alog10(outout(0,tmp)),outout(1,tmp), psym=psym, symsize=symsize, color= b
 ;oplot, (alog10(para(3,*)))(tm3), (para(5,*))(tm3), psym=psym, symsize=symsize, color= blue
 stop
 ```
+
 + 更改了绘图参数
   1. psym = 1   marker是'+'
   2. 删去了 color=black 
@@ -150,15 +152,15 @@ stop
   4. 删去了绘图偏移量 xmargin=[12,2], ymargin=[3.5,1]
   5. 删去了 /nodata 
 
-<img src="C:\Users\dmy\OneDrive\ULySS_M\Test\logTeff-logg.png" alt="logTeff-logg" style="zoom:50%;" /><img src="C:\Users\dmy\OneDrive\ULySS_M\Test\logTeff-FeH.png" alt="logTeff-FeH" style="zoom:52%;" />
+<img src=".\Test\logTeff-logg.png" alt="logTeff-logg" style="zoom:50%;" /><img src=".\Test\logTeff-FeH.png" alt="logTeff-FeH" style="zoom:52%;" />
 
 
 
 
 
-<img src="C:\Users\dmy\OneDrive\ULySS_M\Test\FeH_in-out.png" alt="FeH_in-out" style="zoom:50%;" /><img src="C:\Users\dmy\OneDrive\ULySS_M\Test\Teff_in-out.png" alt="Teff_in-out" style="zoom:50%;" />
+<img src=".\Test\FeH_in-out.png" alt="FeH_in-out" style="zoom:50%;" /><img src=".\Test\Teff_in-out.png" alt="Teff_in-out" style="zoom:50%;" />
 
-<img src="C:\Users\dmy\OneDrive\ULySS_M\Test\RV_in-out.png" alt="RV_in-out" style="zoom:65%;" />
+<img src=".\Test\RV_in-out.png" alt="RV_in-out" style="zoom:65%;" />
 
 
 
