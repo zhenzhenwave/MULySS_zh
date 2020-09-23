@@ -160,7 +160,9 @@ endfor
 ; < === 释放逻辑设备号
 free_lun, lun
 
-
+; < === index2 0\1_list 光谱的拟合是否有效：1有效，0无效
+; < === cnt int 有效的拟合结果一共有多少个
+; < === tmp int_list 有效的光谱的序号
 tmp = where(index2 eq 1, cnt)
 print,'-> valid final out num: ', cnt, 'out of ', nl
 
@@ -222,7 +224,7 @@ cyan  = fsc_color('Cyan')
 orange= fsc_color('Orange')
 charsize= 1.6;1.5 ;3.2
 charthick=1.5 ;0.9
-psym=3        ;1->+, 6->square
+psym=1        ;1->+, 6->square
 symsize= 2.  ;0.8
 xstyle=1
 ystyle=1
@@ -231,49 +233,53 @@ xthick=2 ;4
 ythick=2 ;4
 linestyle = 0 ;line style for gaussian
 
-xr1=[max(outout(0,tmp))+0.5,min(outout(0,tmp))-0.5]
-yr1=[min(outout(1,tmp))-0.5,max(outout(1,tmp))+0.5]
+xr1=[max(outout(0,tmp))+0.5,min(outout(0,tmp))-0.5] ; Teff 的坐标范围
+yr1=[min(outout(1,tmp))-0.5,max(outout(1,tmp))+0.5] ; log g 的坐标范围
 
 ; < ==== 添加了断点，直接画图
 plot, outout(0,*), outout(1,*),psym = 1
 stop
 
 ;== plot teff vs logg ==
+; < ==== 对Teff取了对数lg，那么坐标范围也要取对数
+; < ==== xmargin 是 左下角的偏移量，默认在中心绘图 ,注释了 xmargin=[12,2], ymargin=[3.5,1],  /nodata , 新增了 psym = psym
 plot,alog10(outout(0,tmp)),outout(1,tmp), xtitle='log(Teff)', $
-	xr=xr1,xstyle=xstyle, xthick=xthick, ytickin=1, xtickin=0.1, $
-      xmargin=[12,2], yr=yr1, ythick=ythick, ystyle=ystyle, ymargin=[3.5,1], $
+	xr=alog10(xr1),xstyle=xstyle, xthick=xthick, ytickin=1, xtickin=0.1, $
+       yr=yr1, ythick=ythick, ystyle=ystyle,psym =psym  $
       xticklen=0.025, yticklen=0.015, charsize=charsize, ytitle='log g', $
-      charthick=charthick, /nodata, thick=thick, xminor=2, yminor=2, BACKGROUND = grey
-oplot, alog10(outout(0,tmp)),outout(1,tmp), psym=psym, symsize=symsize, color= black
+      charthick=charthick, thick=thick, xminor=2, yminor=2, BACKGROUND = grey
+; < ==== oplot 是在之前的图上继续绘制矢量图
+; < ==== 注释了 color = black
+oplot, alog10(outout(0,tmp)),outout(1,tmp), psym=psym, symsize=symsize
 ;oplot, (alog10(para(3,*)))(tm3), (para(5,*))(tm3), psym=psym, symsize=symsize, color= blue
-;< === 注释了stop
 stop
 
 ;== plot teff vs feh ==
 xr1=[max(outout(0,tmp))+0.5,min(outout(0,tmp))-0.5]
 yr1=[min(outout(2,tmp))-0.5,max(outout(2,tmp))]+0.5
 plot,alog10(outout(0,tmp)),outout(2,tmp), xtitle='log(Teff)', $
-        xr=xr1,xstyle=xstyle, xthick=xthick, ytickin=1, xtickin=0.1, $
-      xmargin=[12,2], yr=yr1, ythick=ythick, ystyle=ystyle, ymargin=[3.5,1], $
+        xr=alog10(xr1),xstyle=xstyle, xthick=xthick, ytickin=1, xtickin=0.1, $
+       yr=yr1, ythick=ythick, ystyle=ystyle,  $
       xticklen=0.025, yticklen=0.015, charsize=charsize, ytitle='feh', $
       charthick=charthick, /nodata, thick=thick, xminor=2, yminor=2, BACKGROUND = grey
-oplot, alog10(outout(0,tmp)),outout(2,tmp), psym=psym, symsize=symsize, color= black
+oplot, alog10(outout(0,tmp)),outout(2,tmp), psym=psym, symsize=symsize
 stop
 
 
 ;== plot check teff ==
-plot, teffin(tmp), outout(0,tmp),psym=psym, symsize=symsize, color= black
+; < ==== 注释了 color = black
+plot, teffin(tmp), outout(0,tmp),psym=psym, symsize=symsize
 stop
 
 
 ;== plot check feh ==
-plot,fehin(tmp), outout(2,tmp),psym=psym, symsize=symsize, color= black
+plot,fehin(tmp), outout(2,tmp),psym=psym, symsize=symsize
 stop
 ;ok
 
 ;'== plot check rv ==
 tmp1 = where(index2 eq 1 and veloin ne -9999, cnt1)
-plot, veloin(tmp1), outout(3,tmp1),psym=psym, symsize=symsize, color= black
+plot, veloin(tmp1), outout(3,tmp1),psym=psym, symsize=symsize
 stop
 
 
