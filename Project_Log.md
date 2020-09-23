@@ -152,15 +152,15 @@ stop
   4. 删去了绘图偏移量 xmargin=[12,2], ymargin=[3.5,1]
   5. 删去了 /nodata 
 
-<img src=".\Test\logTeff-logg.png" alt="logTeff-logg" style="zoom:50%;" /><img src=".\Test\logTeff-FeH.png" alt="logTeff-FeH" style="zoom:52%;" />
+<img src="./Test/logTeff-logg.png" alt="logTeff-logg" style="zoom:50%;" /><img src="./Test/logTeff-FeH.png" alt="logTeff-FeH" style="zoom:52%;" />
 
 
 
 
 
-<img src=".\Test\FeH_in-out.png" alt="FeH_in-out" style="zoom:50%;" /><img src=".\Test\Teff_in-out.png" alt="Teff_in-out" style="zoom:50%;" />
+<img src="./Test/FeH_in-out.png" alt="FeH_in-out" style="zoom:50%;" /><img src="./Test/Teff_in-out.png" alt="Teff_in-out" style="zoom:50%;" />
 
-<img src=".\Test\RV_in-out.png" alt="RV_in-out" style="zoom:65%;" />
+<img src="./Test/RV_in-out.png" alt="RV_in-out" style="zoom:65%;" />
 
 
 
