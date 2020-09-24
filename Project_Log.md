@@ -45,7 +45,7 @@ IDL> fit_b16_1
 
 ### Fit完成，无图像输出
 
-<img src="./Test/Teff-logg-no-para.png" alt="Teff v.s. log g no para" style="zoom:50%;" />
+[Teff-logg-no-para.png](./Test/figures/Teff-logg-no-para.png)
 
 + 存在11条光谱是invalid，其余fit完成。
 ```idl
@@ -130,7 +130,7 @@ Fe/H           :      -1.4611790 +/- 0.045085786 dex
 ```
 
 3. 拟合之后，画图失败
-<img src="./Test/Teff-logg-error.png" alt="Teff v.s. log g" style="zoom:50%;" />
+[Teff v.s. log g](./Test/figures/Teff-logg-error.png)
 + stop : 在该位置断点。在交互界面输入 .c 即可继续运行 （方便查看变量）
 + plot参数设置 : 
 
@@ -152,24 +152,15 @@ stop
   4. 删去了绘图偏移量 xmargin=[12,2], ymargin=[3.5,1]
   5. 删去了 /nodata 
 
-<img src="./Test/logTeff-logg.png" alt="logTeff-logg" style="zoom:50%;" /><img src="./Test/logTeff-FeH.png" alt="logTeff-FeH" style="zoom:52%;" />
-
-
-
-
-
-<img src="./Test/FeH_in-out.png" alt="FeH_in-out" style="zoom:50%;" /><img src="./Test/Teff_in-out.png" alt="Teff_in-out" style="zoom:50%;" />
-
-<img src="./Test/RV_in-out.png" alt="RV_in-out" style="zoom:65%;" />
-
-
-
-
-
-
+[logTeff-logg](./Test/figures/logTeff-logg.png)
+[logTeff-FeH](./Test/figures/logTeff-FeH.png)
+[FeH_in-out](./Test/figures/FeH_in-out.png)
+[Teff_in-out](./Test/figures/Teff_in-out.png)
+[RV_in-out](./Test/figures/RV_in-out.png)
 
 4. table_b16_1_out文件的含义（以J003010.59+400741.0  spec-56266-M31007N41B1_sp05-090为例）
    + 序号index 是指 有效输出的光谱的原始编号，拟合失败的序号则不存在
+   + sigma是速度弥散$\sigma_{ulyss}=\sqrt{\sqrt{\sigma_{phy}^2+\sigma_{ins}^2}-\sigma_{model}^2}$
 
 | index | DESIG               | file_path                       | snrr  | snr   | T      | T_err | G    | G_err | M     | M_err | RV   | RV_err | sigma | sig_err |
 | ----- | ------------------- | ------------------------------- | ----- | ----- | ------ | ----- | ---- | ----- | ----- | ----- | ---- | ------ | ----- | ------- |
