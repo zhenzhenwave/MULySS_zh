@@ -152,11 +152,13 @@ stop
   4. 删去了绘图偏移量 xmargin=[12,2], ymargin=[3.5,1]
   5. 删去了 /nodata 
 
-[logTeff-logg](./Test/figures/logTeff-logg.png)
-[logTeff-FeH](./Test/figures/logTeff-FeH.png)
-[FeH_in-out](./Test/figures/FeH_in-out.png)
-[Teff_in-out](./Test/figures/Teff_in-out.png)
-[RV_in-out](./Test/figures/RV_in-out.png)
+[logTeff-logg](./Test/figures/logTeff-logg.png)  
+[logTeff-FeH](./Test/figures/logTeff-FeH.png)  
+[FeH_in-out](./Test/figures/FeH_in-out.png)  
+[Teff_in-out](./Test/figures/Teff_in-out.png)  
+[RV_in-out](./Test/figures/RV_in-out.png)   
+
+
 
 4. table_b16_1_out文件的含义（以J003010.59+400741.0  spec-56266-M31007N41B1_sp05-090为例）
    + 序号index 是指 有效输出的光谱的原始编号，拟合失败的序号则不存在

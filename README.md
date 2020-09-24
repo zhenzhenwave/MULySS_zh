@@ -9,8 +9,8 @@
 + 使用手册：[官网](http://ulyss.univ-lyon1.fr/)、[我的笔记](https://github.com/zhenzhenwave/ULySS_M/blob/master/ULySS_note.md)
 
 ## ULySS_M
-+ ULySS对于M矮星的拟合仍有可以改善的工作。
++ ULySS对于M矮星参数拟合的工作。
 + 我的[工作记录](https://github.com/zhenzhenwave/ULySS_M/blob/master/Project_Log.md)
 
 # Acknowledgements
-ULySS是一个开源项目，但因为工作需要，本项目暂时不开源。
+ULySS是一个开源项目
