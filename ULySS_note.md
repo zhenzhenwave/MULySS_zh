@@ -1,11 +1,3 @@
-# TODO
-
-- [x] 安装ULySS、IDL、IDL astro
-- [ ] ~~检查ULySS源码，看看每个部分的运行规则~~
-- [x] 看样例 fit_b16_1.pro （main）例子  table_b16  (input file)  , 字段的信息
-- [ ] 按照例子的做法，尝试筛选数据
-- [ ] 把筛选数据预处理，主程序
-
 # Overview
 ## ULySS文件结构
 1. ulyss.pro ：主程序  、光谱分析
@@ -28,7 +20,7 @@
 1. 信噪比范围（SNR>10，10~20，20~30），初始参数范围设置
 2. 读入fits的光谱范围3900~7500
 3. uly_spect_read.pro相关子程序，真空-空气波长转换
-4. M 星 参数初值设定：Teff:3000~4000，多个log g : 3.0,  1.5 ……，Fe_H : -2,  -1,  0  …… default: G star
+   4. M 星 参数初值设定：Teff:3000~4000，多个log g : 3.0,   1.5 ……，Fe_H : -2,  -1,  0  …… default: G star
 
 ## 拟合光谱
 1. 文件输出file= xxx.fts（流量、谱线） xxx.res（文本，物理参数结果）
@@ -40,7 +32,7 @@
 ## 验证
 用有已知参数的高分辨光谱做验证
 
-# Usage in detail
+# Usage
 ## 恒星大气参数
 1. 读入CFLIB的一个星
 ```idl
