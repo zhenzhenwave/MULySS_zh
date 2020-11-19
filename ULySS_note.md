@@ -90,7 +90,10 @@ Weight         :    0.0057345585 +/-    5.3433868e-05 [data_unit/cmp_unit]
 
 3. 使用模型文件Elodie.3.2内插器，确定大气参数，并绘图
 ```idl
-IDL> ulyss, star, MODEL_FILE=uly_root+'/models/elodie32_flux_tgm.fits', /PLOT
+IDL> ulyss, star, MODEL_FILE=uly_root+'/models/elodie32_flux_tgm.fits', /PLOT, FILE_OUT='test_1'
+IDL> uly_plot_save, 'figure_1.png', /PNG ; 此时不关闭绘图，保存	
+IDL> uly_solut_splot, 'test_1.fits', WAVERANGE=[5000.,5200.] ; 不通过/PLOT查看拟合结果图
+IDL> uly_solut_tprint, 'test_1.res' ; /QUIET 不显示输出，使用 tprint 查看拟合结果
 ```
 
 4. 用导入、卷积的光谱，确定大气参数

@@ -74,7 +74,12 @@ class cata_C(pd.DataFrame):
         # 离群点
         outlier_ind = self.outlier(ref_tgm[index], uly_tgm[index])
         ax.plot(ref_tgm[index][outlier_ind], uly_tgm[index][outlier_ind], 'r+', markersize=10)
-        ax.plot(xrange, xrange, "g--")
+        ax.plot(xrange, xrange, "g--") 
+        # 标注离群点
+        for i in outlier_ind:
+            text = self.index[i]
+            xy = (ref_tgm[index][i], uly_tgm[index][i])
+            ax.annotate(text, xy=xy, xytext=(+5, +5), textcoords='offset points')
 
         ax.set_xlim(xrange)
         ax.set_ylim(xrange)
@@ -89,6 +94,11 @@ class cata_C(pd.DataFrame):
         # 离群点
         outlier_ind = self.outlier(ref_tgm[index], error[index])
         ax2.plot(ref_tgm[index][outlier_ind], error[index][outlier_ind], 'r+', markersize=10)
+        # 标注离群点
+        for i in outlier_ind:
+            text = self.index[i] 
+            xy = (ref_tgm[index][i], error[index][i])
+            ax2.annotate(text, xy=xy, xytext=(+5, +5), textcoords='offset points')
 
         ax2.set_xlim(xrange)
         ax2.set_xlabel(label, fontsize=18)
@@ -100,7 +110,7 @@ class cata_C(pd.DataFrame):
         # 保存
         file_name = ref_name + '_' + s + '.png' 
         plt.savefig(file_name, bbox_inches='tight')
-        plt.show()
+        # plt.show()
         print('Saved to ' + file_name)
         return 'done'
 
@@ -126,23 +136,42 @@ class cata_C(pd.DataFrame):
             if outlier[i]:
                 index.append(i)
         
-        print('Got outliers: \n',self.Name[index].to_string())
+        print('Got outliers: \n', index)
+        print(self.Name[index].to_string())
         return index
 
-    def drawTvsG(self):
+    def draw_parameter_space(self):
         tgm = np.array([self.Teff.to_numpy(), self.logg.to_numpy(), self.Fe_H.to_numpy()])
-
+        
+        # --- log Teff v.s. log g ----------
         fig = plt.figure(figsize = [10, 6])
         ax = fig.add_subplot(111)
         ax.plot(np.log10(tgm[0]), tgm[1], 'g.', markersize=10)
+
         ax.set_xlabel('$log \ T_{eff}$', fontsize=18)
         ax.set_ylabel('$log \ g$', fontsize=18)
+        plt.gca().invert_xaxis()
+        plt.gca().invert_yaxis()
 
-        # 保存
         file_name = 'TvsG.png' 
         plt.savefig(file_name, bbox_inches='tight')
-        plt.show()
+        # plt.show()
         print('Saved to ' + file_name)
+
+        # --- log Teff v.s. Fe_H ------------
+        fig = plt.figure(figsize = [10, 6])
+        ax = fig.add_subplot(111)
+        ax.plot(np.log10(tgm[0]), tgm[2], 'k.', markersize=10)
+
+        ax.set_xlabel('$log \ T_{eff}$', fontsize=18)
+        ax.set_ylabel('Fe/H', fontsize=18)
+        plt.gca().invert_xaxis()
+
+        file_name = 'TvsM.png' 
+        plt.savefig(file_name, bbox_inches='tight')
+        # plt.show()
+        print('Saved to ' + file_name)
+
         return 'done'
 
 

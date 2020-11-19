@@ -28,7 +28,7 @@ if __name__=='__main__':
     output_table.drawTGM('Teff', ref_name)
     output_table.drawTGM('logg', ref_name)
     output_table.drawTGM('Fe_H', ref_name)
-    output_table.drawTvsG()
+    output_table.draw_parameter_space()
 
     output_table.to_csv('catalog_D.csv')
     print('We got %d stars , saved to catalog_D.csv' %len(output_table))

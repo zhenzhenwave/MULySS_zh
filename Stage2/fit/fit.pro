@@ -22,14 +22,14 @@
 pro fit, clean=clean, quiet=quiet
 
 path    = '/home/dmy/fit/'
-md      = 15 ; 多项式阶数
-outpath = '/home/dmy/fit/out/'
+md      = 40 ; 多项式阶数
+outpath = '/home/dmy/fit/solution/'
 infile  = path+'catalog_B.csv'
 outfile = path+'catalog_C.csv'
 
 ; <====  从文件中，逐行读入          
 readcol, infile, index_num, name, file_name, snrr, teffin, loggin, fehin, ra, dec, $ 
-SKIPLINE = 1, DELIMITER=',' ,format='F,A,A,F,F,F,F,F,F'
+SKIPLINE = 1, DELIMITER=',' ,format='F,F,A,F,F,F,F,F,F'
 
 nl = (size(name))[1]
 outout    = fltarr(9,nl)
@@ -55,15 +55,15 @@ for i = 0,nl-1 do begin
 
       print, strtrim(i+1,2), ' ', name(i), ' ', file_path(i)
 
-      ; 读入光谱 LAMOST DR7 光谱波长范围 3700 ~ 9000
-      sp = uly_spect_read(file_path(i), 3700, 9000,/quiet) 
+      ; 选取有效的 光谱波长范围 4000 ~ 9000
+      sp = uly_spect_read(file_path(i), 4000, 9000,/quiet) 
       ;stop
       ;uly_spect_plot,sp
 
       if (size(sp))[2] ne 8 then begin
          bad_spec_num = bad_spec_num + 1
       endif else begin
-         f_name = name(i)
+         f_name = index_num(i) ; eidt here 
          res = outpath+strtrim(f_name,2)
          if file_test(res+'.res') ne 1 then begin
             ; 检查初始值是否可靠
@@ -94,8 +94,8 @@ for i = 0,nl-1 do begin
             time1 = systime(1)
 
             ; <======  拟合大气参数 
-            ulyss, sp, cmp, file=res, md=md, clean=clean, quiet=quiet;, /plot
-            ;stop
+            ulyss, sp, cmp, file=res, md=md, clean=clean, quiet=quiet, /quiet, /plot
+            uly_plot_save, fig_path, /PNG
 
             time2 = systime(1)
             print,'ulyss:', time2 - time1
@@ -121,10 +121,13 @@ for i = 0,nl-1 do begin
                out_czsig(2,i) = sol.losvd[1]    ;sigma
                out_czsig(3,i) = sol.e_losvd[1]  ;sigma_err
                heap_free, sol
+
+               print, 'Got parameters, with SNR : ', outout(8,i)
+               print,  outout(0,i), outout(1,i), outout(2,i)
+               
             endif else begin
             if file_test(res+'.res') eq 1 then file_delete, res+'.res' ;bad normalized spectrum, due to bad 1D spectrum, can not fit
          endelse
-
          uly_spect_free, sp
          
          ; 判断拟合结果的合理性
@@ -141,7 +144,8 @@ for i = 0,nl-1 do begin
       endelse
    endif else print,'-> No valid input fits file.'
    time3 = systime(1)
-   print,time3 - time0
+   print,'Escape in :',time3 - time0,' sec'
+   print, '----- ----- ----- -----'
 endfor
 
 ; < === index2 0\1_list 光谱的拟合是否有效：1有效，0无效

@@ -157,7 +157,7 @@ class cata_A(pd.DataFrame):
 
         file_name = 'TvsG.png' 
         plt.savefig(file_name, bbox_inches='tight')
-        plt.show()
+        # plt.show()
         print('Saved to ' + file_name)
 
         # --- log Teff v.s. Fe_H ------------
@@ -171,7 +171,7 @@ class cata_A(pd.DataFrame):
 
         file_name = 'TvsM.png' 
         plt.savefig(file_name, bbox_inches='tight')
-        plt.show()
+        # plt.show()
         print('Saved to ' + file_name)
 
         return 'done'
