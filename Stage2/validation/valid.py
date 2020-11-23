@@ -7,7 +7,6 @@ from catalog_C import cata_C
 import os
 import sys
 
-
 if __name__=='__main__':
 
     os.chdir(sys.path[0])

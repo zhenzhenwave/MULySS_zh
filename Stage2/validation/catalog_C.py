@@ -5,6 +5,26 @@ import pandas as pd
 from sklearn.cluster import DBSCAN
 # %matplotlib qt
 
+def name2color(name_list):
+    catalog_names = []
+    ref_color = []
+    with open('../label/catalog_names.txt', 'r+') as f:
+        lines = f.readlines()
+        for line in lines:
+            if line[0] == '#':
+                continue
+            id, name, err = line.split('#')
+            name = name.strip()
+            catalog_names.append(name)
+    catalog_names.append('Mald2020') # other reference
+    color_index = np.linspace(0, 255, num = len(catalog_names))
+    d2 = dict(zip(catalog_names, color_index))
+    for name in name_list:
+        if name[-1]=='*':
+            name = name[0:-1]
+        ref_color.append(d2[name])
+    return ref_color
+
 class cata_C(pd.DataFrame):
 
     def tgm2np(self):
@@ -27,6 +47,9 @@ class cata_C(pd.DataFrame):
         self['Teff_ref'] = np.float('nan')
         self['logg_ref'] = np.float('nan')
         self['Fe_H_ref'] = np.float('nan')
+        self['Teff_ref_err'] = np.float('nan')
+        self['logg_ref_err'] = np.float('nan')
+        self['Fe_H_ref_err'] = np.float('nan')
         self['ref_name'] = None
 
         _ra = table_valid.RA
@@ -44,6 +67,9 @@ class cata_C(pd.DataFrame):
         self.Teff_ref = table_valid.loc[index, 'Teff'].to_numpy()
         self.logg_ref = table_valid.loc[index, 'logg'].to_numpy() 
         self.Fe_H_ref = table_valid.loc[index, 'Fe_H'].to_numpy()
+        self.Teff_ref_err = table_valid.loc[index, 'Teff_err'].to_numpy()
+        self.logg_ref_err = table_valid.loc[index, 'logg_err'].to_numpy() 
+        self.Fe_H_ref_err = table_valid.loc[index, 'Fe_H_err'].to_numpy()
         self.ref_name = table_valid.loc[index, 'ref_name'].to_list()
 
     def drawTGM(self, s, ref_name):
@@ -62,14 +88,22 @@ class cata_C(pd.DataFrame):
 
         plt.figure(figsize = [5,10])
 
-        # 参数
+        # 参数 和 误差
         uly_tgm = np.array([self.Teff.to_numpy(), self.logg.to_numpy(), self.Fe_H.to_numpy()])
+        uly_err = np.array([self.Teff_err.to_numpy(), self.logg_err.to_numpy(), self.Fe_H_err.to_numpy()])
         ref_tgm = np.array([self.Teff_ref.to_numpy(), self.logg_ref.to_numpy(), self.Fe_H_ref.to_numpy()])
+        ref_err = np.array([self.Teff_ref_err.to_numpy(), self.logg_ref_err.to_numpy(), self.Fe_H_ref_err.to_numpy()])
+
+        # 绘图
         ax = plt.axes([0.1, 0.35, 0.9, 0.4])
         xmax = np.max([np.max(uly_tgm[index]), np.max(ref_tgm[index])])
         xmin = np.min([np.min(uly_tgm[index]), np.min(ref_tgm[index])])
         xrange = [xmin - 0.1 * (xmax - xmin), xmax + 0.1 * (xmax - xmin)]
-        ax.plot(ref_tgm[index],uly_tgm[index], 'b.', markersize=8)
+        # 不同文献不同颜色
+        color = name2color(self.ref_name[:])
+        ax.errorbar(x = ref_tgm[index], y = uly_tgm[index], xerr = ref_err[index], yerr = uly_err[index],\
+            fmt = '.', ecolor = 'grey', color = 'blue', markersize=0, elinewidth=0.5, capsize=1, alpha=0.8)
+        ax.scatter(ref_tgm[index], uly_tgm[index], c = color, cmap = 'winter', s=25)
 
         # 离群点
         outlier_ind = self.outlier(ref_tgm[index], uly_tgm[index])

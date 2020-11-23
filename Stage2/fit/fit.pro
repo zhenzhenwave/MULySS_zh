@@ -22,7 +22,7 @@
 pro fit, clean=clean, quiet=quiet
 
 path    = '/home/dmy/fit/'
-md      = 40 ; 多项式阶数
+md      = 4 ; 多项式阶数
 outpath = '/home/dmy/fit/solution/'
 infile  = path+'catalog_B.csv'
 outfile = path+'catalog_C.csv'
@@ -163,8 +163,8 @@ if file_test(outfile) eq 1 then file_delete, outfile
 openw, lun, outfile, /get_lun
 ; 表头
 print, 'write to csv file'
-table_head = ['index','lamost','RA','DEC','snr','snrg','Teff','Teff_err','logg','logg_err','Fe_H','Fe_H_err','RV','RV_err','sigma','sig_err']
-printf, lun, table_head, format='(17(A,:,","))'
+table_head = ['index','desig','file_name','RA','DEC','snr','snrg','Teff','Teff_err','logg','logg_err','Fe_H','Fe_H_err','RV','RV_err','sigma','sig_err']
+printf, lun, table_head, format='(18(A,:,","))'
 
 ; 参数
 for i=0, nl-1 do begin
@@ -173,14 +173,15 @@ for i=0, nl-1 do begin
       pos=strpos(file_path(i), 'spec-')
       len = strlen(file_path(i))
 
-      printf, lun, i, desig(i), ra(i), dec(i),  outout(8,i), snr_g(i), $
+      printf, lun, i, desig(i), strmid(file_name(i),0,strlen(file_name(i))-5), $
+              ra(i), dec(i),  outout(8,i), snr_g(i), $
               outout(0,i), outout(4,i)*sqrt(outout(8,i)), $;T ;
               outout(1,i), outout(5,i)*sqrt(outout(8,i)), $;G
               outout(2,i), outout(6,i)*sqrt(outout(8,i)), $;M
               outout(3,i), outout(7,i)*sqrt(outout(8,i)), $;RV
               out_czsig(2,i), out_czsig(3,i)*sqrt(outout(8,i)),$;Sig
-              format='(1(I,:,","), 1(A,:,","), 14(F,:,","))'
-              ;         No.           desig  ra,dec snr,snrg TGM RV sigma
+              format='(1(I,:,","), 2(A,:,","), 14(F,:,","))'
+              ;         No.      desig,file_name          ra,dec snr,snrg TGM RV sigma
    endif
 endfor
 

@@ -74,7 +74,7 @@ def getVizier(table_dict):
         print('Columns:', cata.colnames) 
 
         # 本地是否保存了此表
-        cata_a_name = './ref_tables/' + table_dict[catalog_names[i]] + '.csv'
+        cata_a_name = './ref_tables/' + table_dict[catalog_names[i]][0] + '.csv'
         if os.path.exists(cata_a_name):
             ref_table = cata_A(pd.read_csv(cata_a_name))
             cata_As.append(ref_table)
@@ -99,7 +99,17 @@ def getVizier(table_dict):
                 else:
                     cata_2[key] = None
             cata_2 = cata_2[dict.keys()]
-            cata_2.loc[:, 'ref_name'] = table_dict[catalog_names[i]]
+            cata_2.loc[:, 'ref_name'] = table_dict[catalog_names[i]][0]
+            
+            # 添加 Error bar
+            cata_2.Teff_err = None
+            cata_2.logg_err = None
+            cata_2.Fe_H_err = None
+            T_e, G_e, M_e = table_dict[catalog_names[i]][1].split(',')
+            cata_2.loc[:, 'Teff_err'] = float(T_e)
+            cata_2.loc[:, 'logg_err'] = float(G_e)
+            cata_2.loc[:, 'Fe_H_err'] = float(M_e)
+
             ref_table = cata_A(cata_2)
             cata_As.append(ref_table)
         elif flag in ['no', 'n', '0']:

@@ -52,10 +52,11 @@ def readCataName(file_path):
         for line in lines:
             if line[0] == '#':
                 continue
-            id, name = line.split('#')
+            id, name, err = line.split('#')
             id = id.strip()
             name = name.strip()
-            catalog_names.append([id, name])
+            err = err.strip()
+            catalog_names.append([id, [name, err]])
     d = dict(catalog_names)
     return d
 
