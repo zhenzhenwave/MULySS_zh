@@ -18,7 +18,7 @@ class cata_B(pd.DataFrame):
     def __init__(self, path_root = './spectrum/'):
         file_names = get_fitsNames(path_root)
         index = range(len(file_names))
-        columns = ['lamost', 'file_name', 'snrr', 'teffin', 'loggin', 'fehin', 'RA', 'DEC']
+        columns = ['lamost', 'file_name', 'snrg', 'teffin', 'loggin', 'fehin', 'RA', 'DEC']
         pd.DataFrame.__init__(self, index = index, columns = columns)
         self.path_root = path_root 
         self.file_names = file_names
@@ -32,10 +32,10 @@ class cata_B(pd.DataFrame):
                 data = f[0]
                 c = SkyCoord(data.header['RA'], data.header['DEC'], unit='deg', frame='icrs')
                 lamost_desig = data.header['DESIG'][7:]
-                snrr = data.header['SNRR']
+                snrg = data.header['SNRG']
                 # Query to get parameters' initial guesses
                 t,g,m = self.paraQuery(c)
-                self.at[i] = lamost_desig, self.file_names[i], snrr, t, g, m, c.ra.deg, c.dec.deg
+                self.at[i] = lamost_desig, self.file_names[i], snrg, t, g, m, c.ra.deg, c.dec.deg
 
     def paraQuery(self, coord):
         '''
@@ -56,8 +56,8 @@ class cata_B(pd.DataFrame):
         a, b, c = float(t), float(g), float(m)
         if (a<3100)or(a>5000):
             a = 3500.0
-        if (b<4)or(b>5.9):
-            b = 5.
+        if (b<0)or(b>5.9):
+            b = 2.5
         if (c<-1.)or(c>1.):
             c = -0.05
         return np.round(a,1),np.round(b,1),np.round(c,2)

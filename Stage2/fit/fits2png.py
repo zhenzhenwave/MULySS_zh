@@ -15,7 +15,7 @@ def get_fitsNames(path_root):
 
 def fits2png(file_name, waverange):
     # 绘图
-    fig = plt.figure(figsize=[10,8])
+    plt.figure(figsize=[10,8])
     y = image_data[:,0,:]
     x = np.linspace(waverange[0], waverange[1], len(y[0]))
 

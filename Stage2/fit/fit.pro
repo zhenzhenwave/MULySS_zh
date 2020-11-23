@@ -28,10 +28,10 @@ infile  = path+'catalog_B.csv'
 outfile = path+'catalog_C.csv'
 
 ; <====  从文件中，逐行读入          
-readcol, infile, index_num, name, file_name, snrr, teffin, loggin, fehin, ra, dec, $ 
+readcol, infile, index_num, desig, file_name, snrg, teffin, loggin, fehin, ra, dec, $ 
 SKIPLINE = 1, DELIMITER=',' ,format='F,F,A,F,F,F,F,F,F'
 
-nl = (size(name))[1]
+nl = (size(desig))[1]
 outout    = fltarr(9,nl)
 ; 0- 3   t         g        m         rv
 ; 4- 7   t_err_c   g_err_c  m_err_c   rv_err_c
@@ -39,7 +39,7 @@ outout    = fltarr(9,nl)
 out_czsig = fltarr(4,nl)
 index1    = intarr(nl)
 index2    = intarr(nl)
-snr_r     = snrr
+snr_g     = snrg
 file_path = strarr(nl)
 
 bad_spec_num = 0
@@ -53,10 +53,10 @@ for i = 0,nl-1 do begin
    ; <=== 拟合开始
    if file_test(file_path(i)) eq 1 then begin
 
-      print, strtrim(i+1,2), ' ', name(i), ' ', file_path(i)
+      print, strtrim(i+1,2), ' ', desig(i), ' ', file_path(i)
 
-      ; 选取有效的 光谱波长范围 4000 ~ 9000
-      sp = uly_spect_read(file_path(i), 4000, 9000,/quiet) 
+      ; 选取有效的 光谱波长范围 4000 ~ 7000
+      sp = uly_spect_read(file_path(i), 4000, 7000,/quiet) 
       ;stop
       ;uly_spect_plot,sp
 
@@ -163,7 +163,7 @@ if file_test(outfile) eq 1 then file_delete, outfile
 openw, lun, outfile, /get_lun
 ; 表头
 print, 'write to csv file'
-table_head = ['index','lamost','RA','DEC','snr','snrr','Teff','Teff_err','logg','logg_err','Fe_H','Fe_H_err','RV','RV_err','sigma','sig_err']
+table_head = ['index','lamost','RA','DEC','snr','snrg','Teff','Teff_err','logg','logg_err','Fe_H','Fe_H_err','RV','RV_err','sigma','sig_err']
 printf, lun, table_head, format='(17(A,:,","))'
 
 ; 参数
@@ -173,14 +173,14 @@ for i=0, nl-1 do begin
       pos=strpos(file_path(i), 'spec-')
       len = strlen(file_path(i))
 
-      printf, lun, i, name(i), ra(i), dec(i),  outout(8,i), snr_r(i), $
+      printf, lun, i, desig(i), ra(i), dec(i),  outout(8,i), snr_g(i), $
               outout(0,i), outout(4,i)*sqrt(outout(8,i)), $;T ;
               outout(1,i), outout(5,i)*sqrt(outout(8,i)), $;G
               outout(2,i), outout(6,i)*sqrt(outout(8,i)), $;M
               outout(3,i), outout(7,i)*sqrt(outout(8,i)), $;RV
               out_czsig(2,i), out_czsig(3,i)*sqrt(outout(8,i)),$;Sig
               format='(1(I,:,","), 1(A,:,","), 14(F,:,","))'
-              ;         No.           Name  ra,dec snr,snrr TGM RV sigma
+              ;         No.           desig  ra,dec snr,snrg TGM RV sigma
    endif
 endfor
 

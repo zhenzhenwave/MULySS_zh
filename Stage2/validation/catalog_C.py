@@ -69,12 +69,13 @@ class cata_C(pd.DataFrame):
         xmax = np.max([np.max(uly_tgm[index]), np.max(ref_tgm[index])])
         xmin = np.min([np.min(uly_tgm[index]), np.min(ref_tgm[index])])
         xrange = [xmin - 0.1 * (xmax - xmin), xmax + 0.1 * (xmax - xmin)]
-       
         ax.plot(ref_tgm[index],uly_tgm[index], 'b.', markersize=8)
+
         # 离群点
         outlier_ind = self.outlier(ref_tgm[index], uly_tgm[index])
         ax.plot(ref_tgm[index][outlier_ind], uly_tgm[index][outlier_ind], 'r+', markersize=10)
         ax.plot(xrange, xrange, "g--") 
+
         # 标注离群点
         for i in outlier_ind:
             text = self.index[i]
@@ -89,12 +90,13 @@ class cata_C(pd.DataFrame):
         # 残差
         error = uly_tgm - ref_tgm
         ax2 = plt.axes([0.1, 0.1, 0.9, 0.25])
-
         ax2.plot(ref_tgm[index],error[index] , 'c.',markersize=8)
-        # 离群点
+
+        # 残差离群点
         outlier_ind = self.outlier(ref_tgm[index], error[index])
         ax2.plot(ref_tgm[index][outlier_ind], error[index][outlier_ind], 'r+', markersize=10)
-        # 标注离群点
+
+        # 标注残差离群点
         for i in outlier_ind:
             text = self.index[i] 
             xy = (ref_tgm[index][i], error[index][i])

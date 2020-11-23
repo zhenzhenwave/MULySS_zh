@@ -1,3 +1,11 @@
-J/A+A/615/A6/tablea1
-J/A+A/625/A68/tableb1
-J/ApJ/836/77/table6
+J/A+A/615/A6/tablea1        # Pass2018
+J/A+A/625/A68/tableb1       # Schw2019
+J/ApJ/836/77/table6         # Yee2017
+J/A+A/480/91/table1         # TGMET
+III/232/table               # STELIB
+J/MNRAS/374/664/tablea1     # MILES2_field
+J/MNRAS/374/664/tablea2     # MILES2_cluster
+J/MNRAS/371/703/catalog     # MILES1
+J/ApJS/152/251/library      # CFLIB
+# J/AJ/145/102              # Lepi2013
+# III/218                   # ELODIE

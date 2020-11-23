@@ -37,10 +37,10 @@ def editCol(table):
 if __name__=='__main__':
     os.chdir(sys.path[0])
     sys.path.append("..")
-    from label.catalog_A import cata_A
+    from catalog_A import cata_A
 
     path = 'table_a1.csv'
-    ref_name = 'arXiv:2010.14867/Table_A1'
+    ref_name = 'Mald2020'  # arXiv:2010.14867/Table_A1
     df = cata_A(pd.read_csv(path))
 
     df.columns=['Name','Teff','SpT','Fe_H','logg']
